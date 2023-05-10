@@ -1,0 +1,38 @@
+Project Outputs Generation Report
+---------------------------------
+Start Output Generation At 15:28:55 On 09-04-2023
+
+Output: Gerber X2 Files
+Type  : GerberX2
+From  : PCB Document [single channel esc.PcbDoc]
+   Generated File[single channel esc_Copper_Signal_Top.gbr]
+   Generated File[single channel esc_Copper_Signal_1.gbr]
+   Generated File[single channel esc_Copper_Signal_2.gbr]
+   Generated File[single channel esc_Copper_Signal_3.gbr]
+   Generated File[single channel esc_Copper_Signal_4.gbr]
+   Generated File[single channel esc_Copper_Signal_Bot.gbr]
+   Generated File[single channel esc_Pads_Bot.gbr]
+   Generated File[single channel esc_Pads_Top.gbr]
+   Generated File[single channel esc_Legend_Bot.gbr]
+   Generated File[single channel esc_Soldermask_Bot.gbr]
+   Generated File[single channel esc_Legend_Top.gbr]
+   Generated File[single channel esc_Paste_Top.gbr]
+   Generated File[single channel esc_Paste_Bot.gbr]
+   Generated File[single channel esc_Soldermask_Top.gbr]
+   Generated File[single channel esc_Mechanical_13.gbr]
+   Generated File[single channel esc_Mechanical_5.gbr]
+   Generated File[single channel esc_Mechanical_1.gbr]
+   Generated File[single channel esc_Mechanical_15.gbr]
+   Generated File[single channel esc_Profile.gbr]
+   Generated File[single channel esc_PTH_Drill.gbr]
+   Generated File[single channel esc_Drawing_1.gbr]
+   Generated File[single channel esc_Drillmap_1.gbr]
+   Generated File[Gerber X2 Files.RUL]
+   Generated File[Gerber X2 Files.EXTREP]
+   Generated File[Gerber X2 Files.REP]
+
+
+Files Generated   : 25
+Documents Printed : 0
+
+Finished Output Generation At 15:28:56 On 09-04-2023

@@ -1,0 +1,10 @@
+Removed Pin From Net: NetName=GND Pin=C6-1
+Removed Pin From Net: NetName=6S Pin=C6-2
+Removed Pin From Net: NetName=GND Pin=C7-1
+Removed Pin From Net: NetName=6S Pin=C7-2
+Removed Pin From Net: NetName=GND Pin=C20-1
+Removed Pin From Net: NetName=6S Pin=C20-2
+Removed Member From Class: ClassName=single esc Member=C6
+Removed Member From Class: ClassName=single esc Member=C7
+Removed Member From Class: ClassName=single esc Member=C20
+Added Member To Class: ClassName=single esc Member=Component C16 10uF
