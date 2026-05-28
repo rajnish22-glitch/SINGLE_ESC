@@ -1,0 +1,839 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD25\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">29-05-2026</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:11:22</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:00</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc" class="file"><acronym title="C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc">C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">161</td></tr>
+</table>
+</td>
+</table><a name="ID232CKQGVCSSGNYZSBDZFDFGQSCB5M43NYCYDZVG5X3RK35TWNHXM"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDAQ1Y3KZWQB2LM0TSZWQTN0TAAFIDYNNJL1U1FSHUF1JGUVRQM1YE">Clearance Constraint (Gap=8mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDXMZ2QF22SEITESIJRCTCE1RTMLWPCQSFHD4F2QEEOSZHGBBOVVLH">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDUZ3BO1GCX4VCKZGYEWFKYWZ4APXMXGV4LIZ4ABEDW2SXW5GGBLVC">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDCMNKOOZ5KO2QFI5ETR2210JGECSMGPEYHHD5QX2HHM3KLMOCCAO">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDTA2LPJ5ECRDV4KV4T3GKMR5KJSE53GMAK3HTNGXYGCX5FCSU3JP">Width Constraint (Min=8mil) (Max=7874.016mil) (Preferred=10mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDABAMQVXWYS3HNA5KX4PDKLRA2E2XLGYJYEXFANNLFLXPCYPJJMQK">Routing Topology Rule(Topology=Shortest) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDS3HXTE1M2OEIM1HOE3G5WN1O1OBS4B2O1PNZQTPQ2ZYXSAFK0BBN">Power Plane Connect Rule(Direct Connect )(Expansion=20mil) (Conductor Width=10mil) (Air Gap=10mil) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDMYPDIZD35OKBDDOIPFYDPN55QKFYPIP3Y1D33KETQNPY0TTHPZZF">Minimum Annular Ring (Minimum=7.874mil) (All)</a></td>
+<td class="column2">93</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDSX4NY4RV1AJKM3CQD5AQIIY5P5ENNPESHBFY3O5PRDRSIPISUUE">Hole Size Constraint (Min=1mil) (Max=100mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDN3M2BUHQHLI1NIQT5QUQVBRHSJCBQP4EAAKTXTJOWL1NS30ZGXMD">Hole To Hole Clearance (Gap=10mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDEFMZ0M0DSLSJIHVXWPGW1AG3KPRS3WD5F13E3HLGWLEIO0ISGCBF">Minimum Solder Mask Sliver (Gap=10mil) (All),(All)</a></td>
+<td class="column2">44</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDZITG0OTZIHLVMTMVZNREAPZ3KB1KEJ4RALAHLXPM0UPBCMFISEYL">Silk To Solder Mask (Clearance=10mil) (IsPad),(All)</a></td>
+<td class="column2">19</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDZIPS4MHABED3HU1LKX53QQM2FFROQ50ERQZOMUJD1MRPP5QAQT0H">Silk to Silk (Clearance=10mil) (All),(All)</a></td>
+<td class="column2">4</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDHHLUEECTVTBVHGXSSVKPVBNU1HWW3OT2FADCKAFHGRITF5DYWVEJ">Net Antennae (Tolerance=0mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDJHFIBKCSWQRZLDOPGZWLBO3RWJ3HKS5W1S2ZD1BAFQ2LFAFGAIJM">Board Clearance Constraint (Gap=0mil) (All)</a></td>
+<td class="column2">1</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDOXUX1EPD320HEBVG3MYFKLDM4LCQ2NXJF4LKI1PVGMUSKHPPFQTI">Height Constraint (Min=0mil) (Max=1000mil) (Prefered=500mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">161</td>
+</tr>
+</table><br><a name="IDMYPDIZD35OKBDDOIPFYDPN55QKFYPIP3Y1D33KETQNPY0TTHPZZF"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Annular Ring (Minimum=7.874mil) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3026.934mil|Location2.X=3036.058mil|Location1.Y=3744.454mil|Location2.Y=3753.578mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3026.934mil|Location2.X=3036.058mil|Location1.Y=3744.454mil|Location2.Y=3753.578mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3031.496mil,3740.157mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3026.934mil|Location2.X=3036.058mil|Location1.Y=3823.194mil|Location2.Y=3832.318mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3026.934mil|Location2.X=3036.058mil|Location1.Y=3823.194mil|Location2.Y=3832.318mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3031.496mil,3818.898mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3105.674mil|Location2.X=3114.798mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3105.674mil|Location2.X=3114.798mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3110.236mil,3267.716mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3105.674mil|Location2.X=3114.798mil|Location1.Y=3744.454mil|Location2.Y=3753.578mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3105.674mil|Location2.X=3114.798mil|Location1.Y=3744.454mil|Location2.Y=3753.578mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3110.236mil,3740.157mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3105.674mil|Location2.X=3114.798mil|Location1.Y=3823.194mil|Location2.Y=3832.318mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3105.674mil|Location2.X=3114.798mil|Location1.Y=3823.194mil|Location2.Y=3832.318mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3110.236mil,3818.898mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3145.044mil|Location2.X=3154.168mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3145.044mil|Location2.X=3154.168mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3149.606mil,3267.716mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3184.414mil|Location2.X=3193.538mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3184.414mil|Location2.X=3193.538mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3188.976mil,3267.716mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3223.785mil|Location2.X=3232.909mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3223.785mil|Location2.X=3232.909mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3228.347mil,3267.716mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3263.155mil|Location2.X=3272.278mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3263.155mil|Location2.X=3272.278mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3267.716mil,3267.716mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3302.525mil|Location2.X=3311.649mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3302.525mil|Location2.X=3311.649mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3307.087mil,3267.716mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3341.895mil|Location2.X=3351.019mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3341.895mil|Location2.X=3351.019mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3346.457mil,3267.716mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3381.265mil|Location2.X=3390.389mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3381.265mil|Location2.X=3390.389mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3385.827mil,3267.716mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3420.635mil|Location2.X=3429.759mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3420.635mil|Location2.X=3429.759mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3425.197mil,3267.716mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3460.005mil|Location2.X=3469.129mil|Location1.Y=3586.973mil|Location2.Y=3596.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3460.005mil|Location2.X=3469.129mil|Location1.Y=3586.973mil|Location2.Y=3596.097mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3464.567mil,3582.677mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3460.005mil|Location2.X=3469.129mil|Location1.Y=3626.343mil|Location2.Y=3635.467mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3460.005mil|Location2.X=3469.129mil|Location1.Y=3626.343mil|Location2.Y=3635.467mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3464.567mil,3622.047mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3460.005mil|Location2.X=3469.129mil|Location1.Y=3665.713mil|Location2.Y=3674.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3460.005mil|Location2.X=3469.129mil|Location1.Y=3665.713mil|Location2.Y=3674.838mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3464.567mil,3661.417mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3499.375mil|Location2.X=3508.499mil|Location1.Y=3586.973mil|Location2.Y=3596.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3499.375mil|Location2.X=3508.499mil|Location1.Y=3586.973mil|Location2.Y=3596.097mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3503.937mil,3582.677mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3499.375mil|Location2.X=3508.499mil|Location1.Y=3626.343mil|Location2.Y=3635.467mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3499.375mil|Location2.X=3508.499mil|Location1.Y=3626.343mil|Location2.Y=3635.467mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3503.937mil,3622.047mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3499.375mil|Location2.X=3508.499mil|Location1.Y=3665.713mil|Location2.Y=3674.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3499.375mil|Location2.X=3508.499mil|Location1.Y=3665.713mil|Location2.Y=3674.838mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3503.937mil,3661.417mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3525.438mil|Location2.X=3534.562mil|Location1.Y=3890.296mil|Location2.Y=3899.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3525.438mil|Location2.X=3534.562mil|Location1.Y=3890.296mil|Location2.Y=3899.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3530mil,3886mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3553.438mil|Location2.X=3562.562mil|Location1.Y=3890.296mil|Location2.Y=3899.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3553.438mil|Location2.X=3562.562mil|Location1.Y=3890.296mil|Location2.Y=3899.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3558mil,3886mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3554.438mil|Location2.X=3563.562mil|Location1.Y=3919.296mil|Location2.Y=3928.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3554.438mil|Location2.X=3563.562mil|Location1.Y=3919.296mil|Location2.Y=3928.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3559mil,3915mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3555.438mil|Location2.X=3564.562mil|Location1.Y=3969.296mil|Location2.Y=3978.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3555.438mil|Location2.X=3564.562mil|Location1.Y=3969.296mil|Location2.Y=3978.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3560mil,3965mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3557.438mil|Location2.X=3566.562mil|Location1.Y=3487.296mil|Location2.Y=3496.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3557.438mil|Location2.X=3566.562mil|Location1.Y=3487.296mil|Location2.Y=3496.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3562mil,3483mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3578.115mil|Location2.X=3587.239mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3578.115mil|Location2.X=3587.239mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3582.677mil,3267.716mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3617.485mil|Location2.X=3626.609mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3617.485mil|Location2.X=3626.609mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3622.047mil,3267.716mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3656.855mil|Location2.X=3665.979mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3656.855mil|Location2.X=3665.979mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3661.417mil,3267.716mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3656.855mil|Location2.X=3665.979mil|Location1.Y=3311.383mil|Location2.Y=3320.507mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3656.855mil|Location2.X=3665.979mil|Location1.Y=3311.383mil|Location2.Y=3320.507mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3661.417mil,3307.087mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3656.855mil|Location2.X=3665.979mil|Location1.Y=3350.753mil|Location2.Y=3359.877mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3656.855mil|Location2.X=3665.979mil|Location1.Y=3350.753mil|Location2.Y=3359.877mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3661.417mil,3346.457mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3672.438mil|Location2.X=3681.562mil|Location1.Y=3530.233mil|Location2.Y=3539.357mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3672.438mil|Location2.X=3681.562mil|Location1.Y=3530.233mil|Location2.Y=3539.357mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3677mil,3522mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3674.699mil|Location2.X=3683.823mil|Location1.Y=3570.051mil|Location2.Y=3579.175mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3674.699mil|Location2.X=3683.823mil|Location1.Y=3570.051mil|Location2.Y=3579.175mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3679.261mil,3565.755mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3675.43mil|Location2.X=3684.554mil|Location1.Y=3596.387mil|Location2.Y=3605.511mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3675.43mil|Location2.X=3684.554mil|Location1.Y=3596.387mil|Location2.Y=3605.511mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3679.992mil,3592.091mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3676.162mil|Location2.X=3685.286mil|Location1.Y=3626.382mil|Location2.Y=3635.506mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3676.162mil|Location2.X=3685.286mil|Location1.Y=3626.382mil|Location2.Y=3635.506mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3680.724mil,3622.086mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3678.438mil|Location2.X=3687.562mil|Location1.Y=3875.296mil|Location2.Y=3884.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3678.438mil|Location2.X=3687.562mil|Location1.Y=3875.296mil|Location2.Y=3884.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3683mil,3871mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3696.225mil|Location2.X=3705.349mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3696.225mil|Location2.X=3705.349mil|Location1.Y=3272.013mil|Location2.Y=3281.137mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3700.787mil,3267.716mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3696.225mil|Location2.X=3705.349mil|Location1.Y=3311.383mil|Location2.Y=3320.507mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3696.225mil|Location2.X=3705.349mil|Location1.Y=3311.383mil|Location2.Y=3320.507mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3700.787mil,3307.087mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3696.225mil|Location2.X=3705.349mil|Location1.Y=3350.753mil|Location2.Y=3359.877mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3696.225mil|Location2.X=3705.349mil|Location1.Y=3350.753mil|Location2.Y=3359.877mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3700.787mil,3346.457mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3696.225mil|Location2.X=3705.349mil|Location1.Y=3390.123mil|Location2.Y=3399.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3696.225mil|Location2.X=3705.349mil|Location1.Y=3390.123mil|Location2.Y=3399.247mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3700.787mil,3385.827mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3705.438mil|Location2.X=3714.562mil|Location1.Y=3945.296mil|Location2.Y=3954.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3705.438mil|Location2.X=3714.562mil|Location1.Y=3945.296mil|Location2.Y=3954.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3710mil,3941mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3743.438mil|Location2.X=3752.562mil|Location1.Y=4004.296mil|Location2.Y=4013.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3743.438mil|Location2.X=3752.562mil|Location1.Y=4004.296mil|Location2.Y=4013.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3748mil,4000mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3774.14mil|Location2.X=3783.264mil|Location1.Y=3746.998mil|Location2.Y=3756.122mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3774.14mil|Location2.X=3783.264mil|Location1.Y=3746.998mil|Location2.Y=3756.122mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3778.702mil,3742.702mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3774.966mil|Location2.X=3784.09mil|Location1.Y=3547.603mil|Location2.Y=3556.727mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3774.966mil|Location2.X=3784.09mil|Location1.Y=3547.603mil|Location2.Y=3556.727mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3779.528mil,3543.307mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3775.319mil|Location2.X=3784.443mil|Location1.Y=3581.817mil|Location2.Y=3590.941mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3775.319mil|Location2.X=3784.443mil|Location1.Y=3581.817mil|Location2.Y=3590.941mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3779.881mil,3577.521mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3783.438mil|Location2.X=3792.562mil|Location1.Y=3810.296mil|Location2.Y=3819.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3783.438mil|Location2.X=3792.562mil|Location1.Y=3810.296mil|Location2.Y=3819.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3788mil,3806mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3794.482mil|Location2.X=3803.606mil|Location1.Y=3943.34mil|Location2.Y=3952.464mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3794.482mil|Location2.X=3803.606mil|Location1.Y=3943.34mil|Location2.Y=3952.464mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3799.044mil,3939.044mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3796.438mil|Location2.X=3805.562mil|Location1.Y=3405.296mil|Location2.Y=3414.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3796.438mil|Location2.X=3805.562mil|Location1.Y=3405.296mil|Location2.Y=3414.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3801mil,3401mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3814.336mil|Location2.X=3823.46mil|Location1.Y=3547.603mil|Location2.Y=3556.727mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3814.336mil|Location2.X=3823.46mil|Location1.Y=3547.603mil|Location2.Y=3556.727mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3818.898mil,3543.307mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3814.336mil|Location2.X=3823.46mil|Location1.Y=3586.973mil|Location2.Y=3596.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3814.336mil|Location2.X=3823.46mil|Location1.Y=3586.973mil|Location2.Y=3596.097mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3818.898mil,3582.677mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3864.438mil|Location2.X=3873.562mil|Location1.Y=3943.296mil|Location2.Y=3952.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3864.438mil|Location2.X=3873.562mil|Location1.Y=3943.296mil|Location2.Y=3952.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3869mil,3939mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3879.438mil|Location2.X=3888.562mil|Location1.Y=3727.296mil|Location2.Y=3736.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3879.438mil|Location2.X=3888.562mil|Location1.Y=3727.296mil|Location2.Y=3736.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3884mil,3723mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3879.438mil|Location2.X=3888.562mil|Location1.Y=3764.296mil|Location2.Y=3773.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3879.438mil|Location2.X=3888.562mil|Location1.Y=3764.296mil|Location2.Y=3773.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3884mil,3760mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3879.438mil|Location2.X=3888.562mil|Location1.Y=3799.296mil|Location2.Y=3808.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3879.438mil|Location2.X=3888.562mil|Location1.Y=3799.296mil|Location2.Y=3808.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3884mil,3795mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3887.438mil|Location2.X=3896.562mil|Location1.Y=3983.296mil|Location2.Y=3992.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3887.438mil|Location2.X=3896.562mil|Location1.Y=3983.296mil|Location2.Y=3992.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3892mil,3979mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3890.438mil|Location2.X=3899.562mil|Location1.Y=3569.296mil|Location2.Y=3578.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3890.438mil|Location2.X=3899.562mil|Location1.Y=3569.296mil|Location2.Y=3578.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3895mil,3565mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3893.076mil|Location2.X=3902.2mil|Location1.Y=3429.493mil|Location2.Y=3438.617mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3893.076mil|Location2.X=3902.2mil|Location1.Y=3429.493mil|Location2.Y=3438.617mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3897.638mil,3425.197mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3895.438mil|Location2.X=3904.562mil|Location1.Y=3379.296mil|Location2.Y=3388.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3895.438mil|Location2.X=3904.562mil|Location1.Y=3379.296mil|Location2.Y=3388.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3900mil,3375mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3914.438mil|Location2.X=3923.562mil|Location1.Y=3724.296mil|Location2.Y=3733.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3914.438mil|Location2.X=3923.562mil|Location1.Y=3724.296mil|Location2.Y=3733.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3919mil,3720mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3915.438mil|Location2.X=3924.562mil|Location1.Y=3693.296mil|Location2.Y=3702.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3915.438mil|Location2.X=3924.562mil|Location1.Y=3693.296mil|Location2.Y=3702.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3920mil,3689mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3916.438mil|Location2.X=3925.562mil|Location1.Y=3661.296mil|Location2.Y=3670.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3916.438mil|Location2.X=3925.562mil|Location1.Y=3661.296mil|Location2.Y=3670.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3921mil,3657mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3932.446mil|Location2.X=3941.57mil|Location1.Y=3429.493mil|Location2.Y=3438.617mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3932.446mil|Location2.X=3941.57mil|Location1.Y=3429.493mil|Location2.Y=3438.617mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3937.008mil,3425.197mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3946.438mil|Location2.X=3955.562mil|Location1.Y=3724.296mil|Location2.Y=3733.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3946.438mil|Location2.X=3955.562mil|Location1.Y=3724.296mil|Location2.Y=3733.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3951mil,3720mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3947.438mil|Location2.X=3956.562mil|Location1.Y=3662.296mil|Location2.Y=3671.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3947.438mil|Location2.X=3956.562mil|Location1.Y=3662.296mil|Location2.Y=3671.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3952mil,3658mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3947.438mil|Location2.X=3956.562mil|Location1.Y=3693.296mil|Location2.Y=3702.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3947.438mil|Location2.X=3956.562mil|Location1.Y=3693.296mil|Location2.Y=3702.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3952mil,3689mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.438mil|Location2.X=3974.562mil|Location1.Y=3509.296mil|Location2.Y=3518.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.438mil|Location2.X=3974.562mil|Location1.Y=3509.296mil|Location2.Y=3518.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3970mil,3505mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3971.816mil|Location2.X=3980.94mil|Location1.Y=3429.493mil|Location2.Y=3438.617mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3971.816mil|Location2.X=3980.94mil|Location1.Y=3429.493mil|Location2.Y=3438.617mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3976.378mil,3425.197mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3985.438mil|Location2.X=3994.562mil|Location1.Y=4033.021mil|Location2.Y=4042.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3985.438mil|Location2.X=3994.562mil|Location1.Y=4033.021mil|Location2.Y=4042.145mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (3990mil,4028.724mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4011.186mil|Location2.X=4020.31mil|Location1.Y=3429.493mil|Location2.Y=3438.617mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4011.186mil|Location2.X=4020.31mil|Location1.Y=3429.493mil|Location2.Y=3438.617mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4015.748mil,3425.197mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4015.438mil|Location2.X=4024.562mil|Location1.Y=3514.296mil|Location2.Y=3523.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4015.438mil|Location2.X=4024.562mil|Location1.Y=3514.296mil|Location2.Y=3523.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4020mil,3510mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4038.438mil|Location2.X=4047.562mil|Location1.Y=3941.296mil|Location2.Y=3950.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4038.438mil|Location2.X=4047.562mil|Location1.Y=3941.296mil|Location2.Y=3950.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4043mil,3937mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4044.438mil|Location2.X=4053.562mil|Location1.Y=3832.296mil|Location2.Y=3841.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4044.438mil|Location2.X=4053.562mil|Location1.Y=3832.296mil|Location2.Y=3841.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4049mil,3828mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4045.438mil|Location2.X=4054.562mil|Location1.Y=3660.296mil|Location2.Y=3669.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4045.438mil|Location2.X=4054.562mil|Location1.Y=3660.296mil|Location2.Y=3669.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4050mil,3656mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4045.438mil|Location2.X=4054.562mil|Location1.Y=3705.296mil|Location2.Y=3714.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4045.438mil|Location2.X=4054.562mil|Location1.Y=3705.296mil|Location2.Y=3714.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4050mil,3701mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4045.438mil|Location2.X=4054.562mil|Location1.Y=3747.296mil|Location2.Y=3756.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4045.438mil|Location2.X=4054.562mil|Location1.Y=3747.296mil|Location2.Y=3756.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4050mil,3743mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4045.438mil|Location2.X=4054.562mil|Location1.Y=3790.296mil|Location2.Y=3799.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4045.438mil|Location2.X=4054.562mil|Location1.Y=3790.296mil|Location2.Y=3799.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4050mil,3786mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4050.556mil|Location2.X=4059.68mil|Location1.Y=3429.493mil|Location2.Y=3438.617mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4050.556mil|Location2.X=4059.68mil|Location1.Y=3429.493mil|Location2.Y=3438.617mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4055.118mil,3425.197mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4064.438mil|Location2.X=4073.562mil|Location1.Y=3970.296mil|Location2.Y=3979.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4064.438mil|Location2.X=4073.562mil|Location1.Y=3970.296mil|Location2.Y=3979.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4069mil,3966mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4066.438mil|Location2.X=4075.562mil|Location1.Y=4010.233mil|Location2.Y=4019.357mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4066.438mil|Location2.X=4075.562mil|Location1.Y=4010.233mil|Location2.Y=4019.357mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4071mil,4002mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4089.926mil|Location2.X=4099.05mil|Location1.Y=3429.493mil|Location2.Y=3438.617mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4089.926mil|Location2.X=4099.05mil|Location1.Y=3429.493mil|Location2.Y=3438.617mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4094.488mil,3425.197mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4105.438mil|Location2.X=4114.562mil|Location1.Y=3581.296mil|Location2.Y=3590.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4105.438mil|Location2.X=4114.562mil|Location1.Y=3581.296mil|Location2.Y=3590.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4110mil,3577mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4140.438mil|Location2.X=4149.562mil|Location1.Y=3474.296mil|Location2.Y=3483.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4140.438mil|Location2.X=4149.562mil|Location1.Y=3474.296mil|Location2.Y=3483.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4145mil,3470mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4140.438mil|Location2.X=4149.562mil|Location1.Y=3692.863mil|Location2.Y=3701.987mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4140.438mil|Location2.X=4149.562mil|Location1.Y=3692.863mil|Location2.Y=3701.987mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4145mil,3688.567mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4142.438mil|Location2.X=4151.562mil|Location1.Y=3929.296mil|Location2.Y=3938.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4142.438mil|Location2.X=4151.562mil|Location1.Y=3929.296mil|Location2.Y=3938.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4147mil,3925mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4142.438mil|Location2.X=4151.562mil|Location1.Y=3965.296mil|Location2.Y=3974.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4142.438mil|Location2.X=4151.562mil|Location1.Y=3965.296mil|Location2.Y=3974.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4147mil,3961mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4142.438mil|Location2.X=4151.562mil|Location1.Y=4000.296mil|Location2.Y=4009.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4142.438mil|Location2.X=4151.562mil|Location1.Y=4000.296mil|Location2.Y=4009.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4147mil,3996mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4145.438mil|Location2.X=4154.562mil|Location1.Y=3864.296mil|Location2.Y=3873.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4145.438mil|Location2.X=4154.562mil|Location1.Y=3864.296mil|Location2.Y=3873.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4150mil,3860mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4159.016mil|Location2.X=4168.14mil|Location1.Y=3797.855mil|Location2.Y=3806.979mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4159.016mil|Location2.X=4168.14mil|Location1.Y=3797.855mil|Location2.Y=3806.979mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4163.578mil,3793.559mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4170.438mil|Location2.X=4179.562mil|Location1.Y=3384.296mil|Location2.Y=3393.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4170.438mil|Location2.X=4179.562mil|Location1.Y=3384.296mil|Location2.Y=3393.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4175mil,3380mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4175.119mil|Location2.X=4184.243mil|Location1.Y=3704.296mil|Location2.Y=3713.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4175.119mil|Location2.X=4184.243mil|Location1.Y=3704.296mil|Location2.Y=3713.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4179.681mil,3700mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4174.438mil|Location2.X=4183.562mil|Location1.Y=3927.296mil|Location2.Y=3936.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4174.438mil|Location2.X=4183.562mil|Location1.Y=3927.296mil|Location2.Y=3936.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4179mil,3923mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4175.438mil|Location2.X=4184.562mil|Location1.Y=3597.296mil|Location2.Y=3606.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4175.438mil|Location2.X=4184.562mil|Location1.Y=3597.296mil|Location2.Y=3606.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4180mil,3593mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4175.438mil|Location2.X=4184.562mil|Location1.Y=3965.296mil|Location2.Y=3974.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4175.438mil|Location2.X=4184.562mil|Location1.Y=3965.296mil|Location2.Y=3974.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4180mil,3961mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4203.438mil|Location2.X=4212.562mil|Location1.Y=3480.296mil|Location2.Y=3489.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4203.438mil|Location2.X=4212.562mil|Location1.Y=3480.296mil|Location2.Y=3489.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4208mil,3476mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4239.438mil|Location2.X=4248.562mil|Location1.Y=3539.296mil|Location2.Y=3548.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4239.438mil|Location2.X=4248.562mil|Location1.Y=3539.296mil|Location2.Y=3548.42mil|Absolute=True">Minimum Annular Ring: (5.906mil &lt; 7.874mil) Via (4244mil,3535mil) from Top Layer to Bottom Layer (Annular Ring=5.906mil) On (Top Layer)</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDEFMZ0M0DSLSJIHVXWPGW1AG3KPRS3WD5F13E3HLGWLEIO0ISGCBF"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=10mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3837.588mil|Location2.X=3848.838mil|Location1.Y=3834.706mil|Location2.Y=3845.956mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3837.588mil|Location2.X=3848.838mil|Location1.Y=3834.706mil|Location2.Y=3845.956mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-1(3827.307mil,3850.173mil) on Top Layer And Pad IC1-2(3827.307mil,3830.488mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3837.588mil|Location2.X=3848.838mil|Location1.Y=3657.54mil|Location2.Y=3668.79mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3837.588mil|Location2.X=3848.838mil|Location1.Y=3657.54mil|Location2.Y=3668.79mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-10(3827.307mil,3673.008mil) on Top Layer And Pad IC1-11(3827.307mil,3653.323mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3837.588mil|Location2.X=3848.838mil|Location1.Y=3677.225mil|Location2.Y=3688.475mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3837.588mil|Location2.X=3848.838mil|Location1.Y=3677.225mil|Location2.Y=3688.475mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-10(3827.307mil,3673.008mil) on Top Layer And Pad IC1-9(3827.307mil,3692.693mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3837.588mil|Location2.X=3848.838mil|Location1.Y=3637.855mil|Location2.Y=3649.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3837.588mil|Location2.X=3848.838mil|Location1.Y=3637.855mil|Location2.Y=3649.105mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-11(3827.307mil,3653.323mil) on Top Layer And Pad IC1-12(3827.307mil,3633.638mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3860.162mil|Location2.X=3871.412mil|Location1.Y=3615.28mil|Location2.Y=3626.53mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3860.162mil|Location2.X=3871.412mil|Location1.Y=3615.28mil|Location2.Y=3626.53mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-13(3855.945mil,3605mil) on Top Layer And Pad IC1-14(3875.63mil,3605mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3879.847mil|Location2.X=3891.097mil|Location1.Y=3615.28mil|Location2.Y=3626.53mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3879.847mil|Location2.X=3891.097mil|Location1.Y=3615.28mil|Location2.Y=3626.53mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-14(3875.63mil,3605mil) on Top Layer And Pad IC1-15(3895.315mil,3605mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3899.532mil|Location2.X=3910.782mil|Location1.Y=3615.28mil|Location2.Y=3626.53mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3899.532mil|Location2.X=3910.782mil|Location1.Y=3615.28mil|Location2.Y=3626.53mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-15(3895.315mil,3605mil) on Top Layer And Pad IC1-16(3915mil,3605mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3919.218mil|Location2.X=3930.468mil|Location1.Y=3615.28mil|Location2.Y=3626.53mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3919.218mil|Location2.X=3930.468mil|Location1.Y=3615.28mil|Location2.Y=3626.53mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-16(3915mil,3605mil) on Top Layer And Pad IC1-17(3934.685mil,3605mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3938.903mil|Location2.X=3950.153mil|Location1.Y=3615.28mil|Location2.Y=3626.53mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3938.903mil|Location2.X=3950.153mil|Location1.Y=3615.28mil|Location2.Y=3626.53mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-17(3934.685mil,3605mil) on Top Layer And Pad IC1-18(3954.37mil,3605mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3958.588mil|Location2.X=3969.838mil|Location1.Y=3615.28mil|Location2.Y=3626.53mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3958.588mil|Location2.X=3969.838mil|Location1.Y=3615.28mil|Location2.Y=3626.53mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-18(3954.37mil,3605mil) on Top Layer And Pad IC1-19(3974.055mil,3605mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3978.273mil|Location2.X=3989.523mil|Location1.Y=3615.28mil|Location2.Y=3626.53mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3978.273mil|Location2.X=3989.523mil|Location1.Y=3615.28mil|Location2.Y=3626.53mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-19(3974.055mil,3605mil) on Top Layer And Pad IC1-20(3993.74mil,3605mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3837.588mil|Location2.X=3848.838mil|Location1.Y=3815.021mil|Location2.Y=3826.271mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3837.588mil|Location2.X=3848.838mil|Location1.Y=3815.021mil|Location2.Y=3826.271mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-2(3827.307mil,3830.488mil) on Top Layer And Pad IC1-3(3827.307mil,3810.803mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3997.958mil|Location2.X=4009.208mil|Location1.Y=3615.28mil|Location2.Y=3626.53mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3997.958mil|Location2.X=4009.208mil|Location1.Y=3615.28mil|Location2.Y=3626.53mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-20(3993.74mil,3605mil) on Top Layer And Pad IC1-21(4013.425mil,3605mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4017.643mil|Location2.X=4028.893mil|Location1.Y=3615.28mil|Location2.Y=3626.53mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4017.643mil|Location2.X=4028.893mil|Location1.Y=3615.28mil|Location2.Y=3626.53mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-21(4013.425mil,3605mil) on Top Layer And Pad IC1-22(4033.11mil,3605mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4037.328mil|Location2.X=4048.578mil|Location1.Y=3615.28mil|Location2.Y=3626.53mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4037.328mil|Location2.X=4048.578mil|Location1.Y=3615.28mil|Location2.Y=3626.53mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-22(4033.11mil,3605mil) on Top Layer And Pad IC1-23(4052.795mil,3605mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4057.013mil|Location2.X=4068.263mil|Location1.Y=3615.28mil|Location2.Y=3626.53mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4057.013mil|Location2.X=4068.263mil|Location1.Y=3615.28mil|Location2.Y=3626.53mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-23(4052.795mil,3605mil) on Top Layer And Pad IC1-24(4072.48mil,3605mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4079.588mil|Location2.X=4090.838mil|Location1.Y=3637.855mil|Location2.Y=3649.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4079.588mil|Location2.X=4090.838mil|Location1.Y=3637.855mil|Location2.Y=3649.105mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-25(4101.118mil,3633.638mil) on Top Layer And Pad IC1-26(4101.118mil,3653.323mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4079.588mil|Location2.X=4090.838mil|Location1.Y=3657.54mil|Location2.Y=3668.79mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4079.588mil|Location2.X=4090.838mil|Location1.Y=3657.54mil|Location2.Y=3668.79mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-26(4101.118mil,3653.323mil) on Top Layer And Pad IC1-27(4101.118mil,3673.008mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4079.588mil|Location2.X=4090.838mil|Location1.Y=3677.225mil|Location2.Y=3688.475mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4079.588mil|Location2.X=4090.838mil|Location1.Y=3677.225mil|Location2.Y=3688.475mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-27(4101.118mil,3673.008mil) on Top Layer And Pad IC1-28(4101.118mil,3692.693mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4079.588mil|Location2.X=4090.838mil|Location1.Y=3696.91mil|Location2.Y=3708.16mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4079.588mil|Location2.X=4090.838mil|Location1.Y=3696.91mil|Location2.Y=3708.16mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-28(4101.118mil,3692.693mil) on Top Layer And Pad IC1-29(4101.118mil,3712.378mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4079.588mil|Location2.X=4090.838mil|Location1.Y=3716.595mil|Location2.Y=3727.845mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4079.588mil|Location2.X=4090.838mil|Location1.Y=3716.595mil|Location2.Y=3727.845mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-29(4101.118mil,3712.378mil) on Top Layer And Pad IC1-30(4101.118mil,3732.063mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3837.588mil|Location2.X=3848.838mil|Location1.Y=3795.336mil|Location2.Y=3806.586mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3837.588mil|Location2.X=3848.838mil|Location1.Y=3795.336mil|Location2.Y=3806.586mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-3(3827.307mil,3810.803mil) on Top Layer And Pad IC1-4(3827.307mil,3791.118mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4079.588mil|Location2.X=4090.838mil|Location1.Y=3736.28mil|Location2.Y=3747.53mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4079.588mil|Location2.X=4090.838mil|Location1.Y=3736.28mil|Location2.Y=3747.53mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-30(4101.118mil,3732.063mil) on Top Layer And Pad IC1-31(4101.118mil,3751.748mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4079.588mil|Location2.X=4090.838mil|Location1.Y=3755.965mil|Location2.Y=3767.215mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4079.588mil|Location2.X=4090.838mil|Location1.Y=3755.965mil|Location2.Y=3767.215mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-31(4101.118mil,3751.748mil) on Top Layer And Pad IC1-32(4101.118mil,3771.433mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4079.588mil|Location2.X=4090.838mil|Location1.Y=3775.651mil|Location2.Y=3786.901mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4079.588mil|Location2.X=4090.838mil|Location1.Y=3775.651mil|Location2.Y=3786.901mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-32(4101.118mil,3771.433mil) on Top Layer And Pad IC1-33(4101.118mil,3791.118mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4079.588mil|Location2.X=4090.838mil|Location1.Y=3795.336mil|Location2.Y=3806.586mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4079.588mil|Location2.X=4090.838mil|Location1.Y=3795.336mil|Location2.Y=3806.586mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-33(4101.118mil,3791.118mil) on Top Layer And Pad IC1-34(4101.118mil,3810.803mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4079.588mil|Location2.X=4090.838mil|Location1.Y=3815.021mil|Location2.Y=3826.271mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4079.588mil|Location2.X=4090.838mil|Location1.Y=3815.021mil|Location2.Y=3826.271mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-34(4101.118mil,3810.803mil) on Top Layer And Pad IC1-35(4101.118mil,3830.488mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4079.588mil|Location2.X=4090.838mil|Location1.Y=3834.706mil|Location2.Y=3845.956mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4079.588mil|Location2.X=4090.838mil|Location1.Y=3834.706mil|Location2.Y=3845.956mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-35(4101.118mil,3830.488mil) on Top Layer And Pad IC1-36(4101.118mil,3850.173mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4057.013mil|Location2.X=4068.263mil|Location1.Y=3857.28mil|Location2.Y=3868.53mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4057.013mil|Location2.X=4068.263mil|Location1.Y=3857.28mil|Location2.Y=3868.53mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-37(4072.48mil,3878.811mil) on Top Layer And Pad IC1-38(4052.795mil,3878.811mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4037.328mil|Location2.X=4048.578mil|Location1.Y=3857.28mil|Location2.Y=3868.53mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4037.328mil|Location2.X=4048.578mil|Location1.Y=3857.28mil|Location2.Y=3868.53mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-38(4052.795mil,3878.811mil) on Top Layer And Pad IC1-39(4033.11mil,3878.811mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4017.643mil|Location2.X=4028.893mil|Location1.Y=3857.28mil|Location2.Y=3868.53mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4017.643mil|Location2.X=4028.893mil|Location1.Y=3857.28mil|Location2.Y=3868.53mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-39(4033.11mil,3878.811mil) on Top Layer And Pad IC1-40(4013.425mil,3878.811mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3837.588mil|Location2.X=3848.838mil|Location1.Y=3775.651mil|Location2.Y=3786.901mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3837.588mil|Location2.X=3848.838mil|Location1.Y=3775.651mil|Location2.Y=3786.901mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-4(3827.307mil,3791.118mil) on Top Layer And Pad IC1-5(3827.307mil,3771.433mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3997.958mil|Location2.X=4009.208mil|Location1.Y=3857.28mil|Location2.Y=3868.53mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3997.958mil|Location2.X=4009.208mil|Location1.Y=3857.28mil|Location2.Y=3868.53mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-40(4013.425mil,3878.811mil) on Top Layer And Pad IC1-41(3993.74mil,3878.811mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3978.273mil|Location2.X=3989.523mil|Location1.Y=3857.28mil|Location2.Y=3868.53mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3978.273mil|Location2.X=3989.523mil|Location1.Y=3857.28mil|Location2.Y=3868.53mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-41(3993.74mil,3878.811mil) on Top Layer And Pad IC1-42(3974.055mil,3878.811mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3958.588mil|Location2.X=3969.838mil|Location1.Y=3857.28mil|Location2.Y=3868.53mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3958.588mil|Location2.X=3969.838mil|Location1.Y=3857.28mil|Location2.Y=3868.53mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-42(3974.055mil,3878.811mil) on Top Layer And Pad IC1-43(3954.37mil,3878.811mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3938.903mil|Location2.X=3950.153mil|Location1.Y=3857.28mil|Location2.Y=3868.53mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3938.903mil|Location2.X=3950.153mil|Location1.Y=3857.28mil|Location2.Y=3868.53mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-43(3954.37mil,3878.811mil) on Top Layer And Pad IC1-44(3934.685mil,3878.811mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3919.218mil|Location2.X=3930.468mil|Location1.Y=3857.28mil|Location2.Y=3868.53mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3919.218mil|Location2.X=3930.468mil|Location1.Y=3857.28mil|Location2.Y=3868.53mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-44(3934.685mil,3878.811mil) on Top Layer And Pad IC1-45(3915mil,3878.811mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3899.532mil|Location2.X=3910.782mil|Location1.Y=3857.28mil|Location2.Y=3868.53mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3899.532mil|Location2.X=3910.782mil|Location1.Y=3857.28mil|Location2.Y=3868.53mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-45(3915mil,3878.811mil) on Top Layer And Pad IC1-46(3895.315mil,3878.811mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3879.847mil|Location2.X=3891.097mil|Location1.Y=3857.28mil|Location2.Y=3868.53mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3879.847mil|Location2.X=3891.097mil|Location1.Y=3857.28mil|Location2.Y=3868.53mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-46(3895.315mil,3878.811mil) on Top Layer And Pad IC1-47(3875.63mil,3878.811mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3860.162mil|Location2.X=3871.412mil|Location1.Y=3857.28mil|Location2.Y=3868.53mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3860.162mil|Location2.X=3871.412mil|Location1.Y=3857.28mil|Location2.Y=3868.53mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-47(3875.63mil,3878.811mil) on Top Layer And Pad IC1-48(3855.945mil,3878.811mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3837.588mil|Location2.X=3848.838mil|Location1.Y=3755.965mil|Location2.Y=3767.215mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3837.588mil|Location2.X=3848.838mil|Location1.Y=3755.965mil|Location2.Y=3767.215mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-5(3827.307mil,3771.433mil) on Top Layer And Pad IC1-6(3827.307mil,3751.748mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3837.588mil|Location2.X=3848.838mil|Location1.Y=3736.28mil|Location2.Y=3747.53mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3837.588mil|Location2.X=3848.838mil|Location1.Y=3736.28mil|Location2.Y=3747.53mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-6(3827.307mil,3751.748mil) on Top Layer And Pad IC1-7(3827.307mil,3732.063mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3837.588mil|Location2.X=3848.838mil|Location1.Y=3716.595mil|Location2.Y=3727.845mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3837.588mil|Location2.X=3848.838mil|Location1.Y=3716.595mil|Location2.Y=3727.845mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-7(3827.307mil,3732.063mil) on Top Layer And Pad IC1-8(3827.307mil,3712.378mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3837.588mil|Location2.X=3848.838mil|Location1.Y=3696.91mil|Location2.Y=3708.16mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3837.588mil|Location2.X=3848.838mil|Location1.Y=3696.91mil|Location2.Y=3708.16mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.654mil &lt; 10mil) Between Pad IC1-8(3827.307mil,3712.378mil) on Top Layer And Pad IC1-9(3827.307mil,3692.693mil) on Top Layer [Top Solder] Mask Sliver [9.654mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDZITG0OTZIHLVMTMVZNREAPZ3KB1KEJ4RALAHLXPM0UPBCMFISEYL"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=10mil) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3439.326mil|Location2.X=3450.576mil|Location1.Y=3726.973mil|Location2.Y=3738.223mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3439.326mil|Location2.X=3450.576mil|Location1.Y=3726.973mil|Location2.Y=3738.223mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.941mil &lt; 10mil) Between Pad C14-1(3476.89mil,3770mil) on Top Layer And Track (3404.41mil,3732.598mil)(3437.48mil,3732.598mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9.941mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3439.326mil|Location2.X=3450.576mil|Location1.Y=3801.777mil|Location2.Y=3813.027mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3439.326mil|Location2.X=3450.576mil|Location1.Y=3801.777mil|Location2.Y=3813.027mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.941mil &lt; 10mil) Between Pad C14-1(3476.89mil,3770mil) on Top Layer And Track (3404.41mil,3807.402mil)(3437.48mil,3807.402mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9.941mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3391.314mil|Location2.X=3402.564mil|Location1.Y=3726.973mil|Location2.Y=3738.223mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3391.314mil|Location2.X=3402.564mil|Location1.Y=3726.973mil|Location2.Y=3738.223mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.941mil &lt; 10mil) Between Pad C14-2(3365mil,3770mil) on Top Layer And Track (3404.41mil,3732.598mil)(3437.48mil,3732.598mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9.941mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3391.314mil|Location2.X=3402.564mil|Location1.Y=3801.777mil|Location2.Y=3813.027mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3391.314mil|Location2.X=3402.564mil|Location1.Y=3801.777mil|Location2.Y=3813.027mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.941mil &lt; 10mil) Between Pad C14-2(3365mil,3770mil) on Top Layer And Track (3404.41mil,3807.402mil)(3437.48mil,3807.402mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9.941mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3145.369mil|Location2.X=3156.619mil|Location1.Y=3726.973mil|Location2.Y=3738.223mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3145.369mil|Location2.X=3156.619mil|Location1.Y=3726.973mil|Location2.Y=3738.223mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.941mil &lt; 10mil) Between Pad C15-1(3119.055mil,3770mil) on Top Layer And Track (3158.465mil,3732.598mil)(3191.535mil,3732.598mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9.941mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3145.369mil|Location2.X=3156.619mil|Location1.Y=3801.777mil|Location2.Y=3813.027mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3145.369mil|Location2.X=3156.619mil|Location1.Y=3801.777mil|Location2.Y=3813.027mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.941mil &lt; 10mil) Between Pad C15-1(3119.055mil,3770mil) on Top Layer And Track (3158.465mil,3807.402mil)(3191.535mil,3807.402mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9.941mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3193.381mil|Location2.X=3204.631mil|Location1.Y=3726.973mil|Location2.Y=3738.223mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3193.381mil|Location2.X=3204.631mil|Location1.Y=3726.973mil|Location2.Y=3738.223mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.941mil &lt; 10mil) Between Pad C15-2(3230.945mil,3770mil) on Top Layer And Track (3158.465mil,3732.598mil)(3191.535mil,3732.598mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9.941mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3193.381mil|Location2.X=3204.631mil|Location1.Y=3801.777mil|Location2.Y=3813.027mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3193.381mil|Location2.X=3204.631mil|Location1.Y=3801.777mil|Location2.Y=3813.027mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.941mil &lt; 10mil) Between Pad C15-2(3230.945mil,3770mil) on Top Layer And Track (3158.465mil,3807.402mil)(3191.535mil,3807.402mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9.941mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3927.564mil|Location2.X=3938.814mil|Location1.Y=3949.633mil|Location2.Y=3960.883mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3927.564mil|Location2.X=3938.814mil|Location1.Y=3949.633mil|Location2.Y=3960.883mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.209mil &lt; 10mil) Between Pad R1-1(3945mil,3967.992mil) on Top Layer And Text "R1" (3932.257mil,3926.193mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.209mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3583.564mil|Location2.X=3594.814mil|Location1.Y=3872.617mil|Location2.Y=3883.867mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3583.564mil|Location2.X=3594.814mil|Location1.Y=3872.617mil|Location2.Y=3883.867mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (1.208mil &lt; 10mil) Between Pad R11-1(3601mil,3867.008mil) on Top Layer And Text "C1" (3583.257mil,3882.193mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [1.209mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3631.564mil|Location2.X=3642.814mil|Location1.Y=3874.617mil|Location2.Y=3885.867mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3631.564mil|Location2.X=3642.814mil|Location1.Y=3874.617mil|Location2.Y=3885.867mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.208mil &lt; 10mil) Between Pad R12-2(3649mil,3867.008mil) on Top Layer And Text "C2" (3629.321mil,3886.193mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.209mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4034.696mil|Location2.X=4045.946mil|Location1.Y=3949.633mil|Location2.Y=3960.883mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4034.696mil|Location2.X=4045.946mil|Location1.Y=3949.633mil|Location2.Y=3960.883mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.209mil &lt; 10mil) Between Pad R2-2(4035mil,3967.992mil) on Top Layer And Text "R2" (4040.321mil,3926.193mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.209mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4015.74mil|Location2.X=4026.99mil|Location1.Y=3948.871mil|Location2.Y=3960.121mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4015.74mil|Location2.X=4026.99mil|Location1.Y=3948.871mil|Location2.Y=3960.121mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (6.795mil &lt; 10mil) Between Pad R2-2(4035mil,3967.992mil) on Top Layer And Text "R8" (3982.321mil,3925.193mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [6.795mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4092.696mil|Location2.X=4103.946mil|Location1.Y=3949.133mil|Location2.Y=3960.383mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4092.696mil|Location2.X=4103.946mil|Location1.Y=3949.133mil|Location2.Y=3960.383mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.209mil &lt; 10mil) Between Pad R7-2(4105mil,3967.992mil) on Top Layer And Text "R7" (4098.321mil,3925.193mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.209mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3976.696mil|Location2.X=3987.946mil|Location1.Y=3949.133mil|Location2.Y=3960.383mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3976.696mil|Location2.X=3987.946mil|Location1.Y=3949.133mil|Location2.Y=3960.383mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.209mil &lt; 10mil) Between Pad R8-1(3990mil,3967.992mil) on Top Layer And Text "R8" (3982.321mil,3925.193mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.209mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3994.375mil|Location2.X=4005.625mil|Location1.Y=4057.712mil|Location2.Y=4068.962mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3994.375mil|Location2.X=4005.625mil|Location1.Y=4057.712mil|Location2.Y=4068.962mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (6.367mil &lt; 10mil) Between Pad ST3-1(4000mil,4100mil) on Multi-Layer And Text "ST3" (3969.514mil,4033.193mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [6.367mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3894.375mil|Location2.X=3905.625mil|Location1.Y=4057.712mil|Location2.Y=4068.962mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3894.375mil|Location2.X=3905.625mil|Location1.Y=4057.712mil|Location2.Y=4068.962mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (6.367mil &lt; 10mil) Between Pad ST4-1(3900mil,4100mil) on Multi-Layer And Text "ST4" (3874.514mil,4033.193mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [6.367mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4094.375mil|Location2.X=4105.625mil|Location1.Y=4057.212mil|Location2.Y=4068.462mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4094.375mil|Location2.X=4105.625mil|Location1.Y=4057.212mil|Location2.Y=4068.462mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (7.367mil &lt; 10mil) Between Pad ST6-1(4100mil,4100mil) on Multi-Layer And Text "ST6" (4068.514mil,4032.193mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [7.367mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4194.375mil|Location2.X=4205.625mil|Location1.Y=4056.712mil|Location2.Y=4067.962mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4194.375mil|Location2.X=4205.625mil|Location1.Y=4056.712mil|Location2.Y=4067.962mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.367mil &lt; 10mil) Between Pad ST9-1(4200mil,4100mil) on Multi-Layer And Text "ST9" (4169.514mil,4031.193mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.367mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDZIPS4MHABED3HU1LKX53QQM2FFROQ50ERQZOMUJD1MRPP5QAQT0H"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=10mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4012.118mil|Location2.X=4023.368mil|Location1.Y=3912.656mil|Location2.Y=3923.906mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4012.118mil|Location2.X=4023.368mil|Location1.Y=3912.656mil|Location2.Y=3923.906mil|Absolute=True">Silk To Silk Clearance Constraint: (7.13mil &lt; 10mil) Between Region (0 hole(s)) Top Overlay And Text "R8" (3982.321mil,3925.193mil) on Top Overlay Silk Text to Silk Clearance [7.13mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3616.407mil|Location2.X=3627.657mil|Location1.Y=3880.536mil|Location2.Y=3891.786mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3616.407mil|Location2.X=3627.657mil|Location1.Y=3880.536mil|Location2.Y=3891.786mil|Absolute=True">Silk To Silk Clearance Constraint: (9.905mil &lt; 10mil) Between Text "C1" (3583.257mil,3882.193mil) on Top Overlay And Text "C2" (3629.321mil,3886.193mil) on Top Overlay Silk Text to Silk Clearance [9.905mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.568mil|Location2.X=3592.818mil|Location1.Y=3906.875mil|Location2.Y=3918.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.568mil|Location2.X=3592.818mil|Location1.Y=3906.875mil|Location2.Y=3918.125mil|Absolute=True">Silk To Silk Clearance Constraint: (6.693mil &lt; 10mil) Between Text "C1" (3583.257mil,3882.193mil) on Top Overlay And Text "R11" (3559.418mil,3919.193mil) on Top Overlay Silk Text to Silk Clearance [6.693mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3651.247mil|Location2.X=3662.497mil|Location1.Y=3909.375mil|Location2.Y=3920.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3651.247mil|Location2.X=3662.497mil|Location1.Y=3909.375mil|Location2.Y=3920.625mil|Absolute=True">Silk To Silk Clearance Constraint: (3.693mil &lt; 10mil) Between Text "C2" (3629.321mil,3886.193mil) on Top Overlay And Text "R12" (3631.482mil,3920.193mil) on Top Overlay Silk Text to Silk Clearance [3.693mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDJHFIBKCSWQRZLDOPGZWLBO3RWJ3HKS5W1S2ZD1BAFQ2LFAFGAIJM"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Board Clearance Constraint (Gap=0mil) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4293.108mil|Location2.X=4299.441mil|Location1.Y=3659.825mil|Location2.Y=3666.159mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Rajnish\Documents\trinovate\SINGLE_ESC\single_esc.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4293.108mil|Location2.X=4299.441mil|Location1.Y=3659.825mil|Location2.Y=3666.159mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 8mil) Between Board Edge And Text "C12" (4235.482mil,3651.185mil) on Top Overlay </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>

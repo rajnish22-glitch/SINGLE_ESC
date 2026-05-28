@@ -1,0 +1,35 @@
+Project Outputs Generation Report
+---------------------------------
+Start Output Generation At 00:12:10 On 29-05-2026
+
+Output: Gerber X2 Files
+Type  : GerberX2
+From  : Variant [[No Variations]] of PCB Document [single_esc.PcbDoc]
+   Generated File[single_esc_Copper_Signal_Top.gbr]
+   Generated File[single_esc_Copper_Signal_Bot.gbr]
+   Generated File[single_esc_Pads_Bot.gbr]
+   Generated File[single_esc_Pads_Top.gbr]
+   Generated File[single_esc_Legend_Top.gbr]
+   Generated File[single_esc_Legend_Bot.gbr]
+   Generated File[single_esc_Soldermask_Top.gbr]
+   Generated File[single_esc_Soldermask_Bot.gbr]
+   Generated File[single_esc_Paste_Top.gbr]
+   Generated File[single_esc_Paste_Bot.gbr]
+   Generated File[single_esc_Mechanical_1.gbr]
+   Generated File[single_esc_Top_Assembly.gbr]
+   Generated File[single_esc_Top_3D_Body.gbr]
+   Generated File[single_esc_Top_Courtyard.gbr]
+   Generated File[single_esc_Top_Component_Center.gbr]
+   Generated File[single_esc_Top_Designator.gbr]
+   Generated File[single_esc_Profile.gbr]
+   Generated File[single_esc_PTH_Drill.gbr]
+   Generated File[single_esc_Drawing_1.gbr]
+   Generated File[single_esc_Drillmap_1.gbr]
+   Generated File[single_esc.EXTREP]
+   Generated File[single_esc.REP]
+
+
+Files Generated   : 22
+Documents Printed : 0
+
+Finished Output Generation At 00:12:14 On 29-05-2026
