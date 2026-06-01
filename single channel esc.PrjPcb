@@ -36,7 +36,10 @@ ConstraintManagerFlow=0
 IsVirtualBomDocumentRemoved=0
 OutputPath=
 LogFolderPath=
-ManagedProjectGUID=
+ManagedProjectGUID=59B15A08-51C9-41A1-BE66-930E2864B05F
+VaultGUID=0A317998-9AFA-41DA-BA7F-4607D3B9EC3D
+ReleaseVaultName=Rajnish kumar
+ItemGUID=59B15A08-51C9-41A1-BE66-930E2864B05F
 IncludeDesignInRelease=0
 CrossRefSheetStyle=1
 CrossRefLocationStyle=1
@@ -174,6 +177,10 @@ DItemRevisionGUID=
 
 [GeneratedDocument2]
 DocumentPath=Project Outputs for single channel esc\Design Rule Check - single channel esc.html
+DItemRevisionGUID=
+
+[GeneratedDocument3]
+DocumentPath=Project Outputs for single channel esc\ExportSTEP\single_esc.step
 DItemRevisionGUID=
 
 [Configuration1]
