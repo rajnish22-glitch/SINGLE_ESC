@@ -1,0 +1,21 @@
+Change Component Footprint: Designator=C6 Old Footprint=FP-OS-CON-SMT-F12-MFG New Footprint=CAPC3216X190N
+Change Component Comment : Designator=C6 Old Comment=50SVPK120M New Comment=10uF
+Change Managed Component Library Link : Designator=C6 Old VaultGUID=B7D15EC3-160A-466F-A46C-7801FE6295A7 New VaultGUID= Old ItemGUID=B78E7148-6DBB-4987-83F3-0614BEC98694 New ItemGUID= Old RevisionGUID=DC75116D-61C9-4403-A9A5-4218D6A49AD6 New RevisionGUID=
+Change component parameters: Designator = "C6" ("C6"); Footprint = "FP-OS-CON-SMT-F12-MFG"; UniqueID = "\BUEHSZQX" ("\BUEHSZQX")
+Change component parameters (AddParameter): Name = "Availability"; Value = "Unavailable"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MF"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "GRM31CC80G227ME11K"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "None"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Price"; Value = "None"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=C7(CAPC3216X190N)
+Add component (AddParameter): Name = "Availability"; Value = "Unavailable"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "GRM31CC80G227ME11K"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Price"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=C7-1
+Added Pin To Net: NetName=BAT Pin=C7-2
+Added Member To Class: ClassName=single esc Member=Component C7 10uF
+Added Room: Name=single esc
